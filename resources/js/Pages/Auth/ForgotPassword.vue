@@ -1,11 +1,10 @@
 <script setup>
+import BreezeButton from '@/Components/Button.vue';
+import BreezeGuestLayout from '@/Layouts/Guest.vue';
+import BreezeInput from '@/Components/Input.vue';
+import BreezeInputError from '@/Components/InputError.vue';
+import BreezeLabel from '@/Components/Label.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue';
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
-import JetButton from '@/Jetstream/Button.vue';
-import JetInput from '@/Jetstream/Input.vue';
-import JetLabel from '@/Jetstream/Label.vue';
-import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 defineProps({
     status: String,
@@ -21,12 +20,8 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Forgot Password" />
-
-    <JetAuthenticationCard>
-        <template #logo>
-            <JetAuthenticationCardLogo />
-        </template>
+    <BreezeGuestLayout>
+        <Head title="Forgot Password" />
 
         <div class="mb-4 text-sm text-gray-600">
             Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
@@ -36,26 +31,18 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <JetValidationErrors class="mb-4" />
-
         <form @submit.prevent="submit">
             <div>
-                <JetLabel for="email" value="Email" />
-                <JetInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                />
+                <BreezeLabel for="email" value="Email" />
+                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+                <BreezeInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Email Password Reset Link
-                </JetButton>
+                </BreezeButton>
             </div>
         </form>
-    </JetAuthenticationCard>
+    </BreezeGuestLayout>
 </template>
