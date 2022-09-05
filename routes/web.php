@@ -30,6 +30,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('posts', PostController::class);
-
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('companies', 'HomeController@list')->name('companies');
+});
 
 require __DIR__.'/auth.php';
