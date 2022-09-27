@@ -31,7 +31,7 @@
                         placeholder="search employee name... "
                     >
                     <div
-                        v-if="params.employee_search"
+                        v-if="params.employee_search    "
                         @click="this.params.employee_search = null"
                         class="space-x-1 px-3 py-2 text-sm group hover:text-gray-900
                             hover:bg-white text-gray-700 cursor-pointer ">
